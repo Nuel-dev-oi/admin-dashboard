@@ -1,0 +1,114 @@
+Question 1.20 Marks
+Problem Statement
+Build a Simple Support Ticket System consisting of:
+
+Backend APIs
+Web admin dashboard (just listing)  - only accessible with a login. You can create admin user directly in the database and use the credential to login to the admin dashboard.
+A public (no login required) ticket submission web application
+Tech Stack (Mandatory)
+Node.js + Express or Next.js
+MySQL
+React.js or Next.js
+Tailwind CSS
+UI & Design
+Please be as creative as possible with the design while ensuring it is fully responsive.
+
+Functional Requirements
+ 
+1️⃣ Backend (Node.js + Express or Next.js + MySQL)
+Database
+Create a MySQL table named tickets with the following fields:
+
+id (INT, Primary Key, Auto Increment)
+
+name (VARCHAR)
+
+email (VARCHAR)
+
+subject (VARCHAR)
+
+description (TEXT)
+
+priority (ENUM: low, medium, high)
+
+status (ENUM: open, in_progress, resolved, closed)
+
+created_at (TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+
+APIs to Implement
+POST /api/tickets
+Create a new ticket
+
+Input: name, email, subject, description, priority
+
+GET /api/tickets
+Fetch all tickets
+
+Optional filters:
+
+/api/tickets?status=open
+
+/api/tickets?priority=high
+
+GET /api/tickets/:id
+Fetch a single ticket by id
+
+PUT /api/tickets/:id/status
+Update ticket status
+
+Input: status (open/in_progress/resolved/closed)
+
+ 
+2️⃣ Web Admin Dashboard (React.js or Next.js + Tailwind CSS)
+Features
+Fetch and display tickets in a table with columns:
+
+Name
+Email
+Priority
+Status
+Created At
+Action
+Filters:
+
+Filter by Status (dropdown)
+Filter by Priority (dropdown)
+Status badges:
+
+open → yellow badge
+in_progress → blue badge
+resolved → green badge
+closed → gray badge
+Actions per row:
+
+Mark In Progress
+Resolve
+Close
+ 
+3️⃣ Public Web Application (React.js or Next.js + Tailwind CSS)
+Screen: Ticket Submission
+Input fields:
+
+Name
+Email
+Subject
+Description
+Priority (low/medium/high)
+Submit button
+Basic validation:
+
+All fields required
+Email must be valid format
+Priority must be one of (low/medium/high)
+On submit:
+
+Call POST / api / tickets
+Show success/failure message
+4️⃣ Recording, Explanation & Submission (15 Minutes)
+Record a short explanation covering:
+
+Database schema + API design decisions
+Web dashboard flow (list + filters + status updates)
+Public web application flow and API integration
+Any shortcuts/assumptions
+Upload video to Google Drive → set to “Anyone with the link can view” → paste link in the below answer box.

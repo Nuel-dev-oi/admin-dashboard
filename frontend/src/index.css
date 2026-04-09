@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --background-image-wall-paper-sm: url("/src/assets/bg-sm.jpg");
+  --background-image-wall-paper: url("/src/assets/bg.jpg");
+  --font-gruppo: "Gruppo", sans-serif;
+  --font-sans: "Rubik", sans-serif;
+  --font-cursive: "Dancing Script", cursive;
+  --font-merienda: "Merienda", cursive;
+  --font-roboto: "Roboto", sans-serif;
+  --font-oxanium: "Oxanium", sans-serif;
+  --font-bitcount: "Bitcount Prop Single Ink", system-ui;
+}
+
+:root {
+  text-rendering: optimizeLegibility;
+}
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  font-family:
+    var(--font-gruppo), "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 100%;
+  height: max-content;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-weight: 600;
+}
