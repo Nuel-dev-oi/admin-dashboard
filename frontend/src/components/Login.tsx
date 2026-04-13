@@ -1,22 +1,22 @@
 import { useEffect, useRef, useState, type JSX } from "react";
 import { Link, useNavigate } from "react-router";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 interface Props {
-  onSetUser: (value: User) => void,
+  onSetUser: (value: User) => void;
 }
 
 interface UserIndentity {
   user: {
-    name: string
-    isAdmin: boolean
-  },
-  token: string
-};
+    name: string;
+    isAdmin: boolean;
+  };
+  token: string;
+}
 
 interface User {
-    name: string
-    isAdmin: boolean
+  name: string;
+  isAdmin: boolean;
 }
 
 const Login = ({ onSetUser }: Props): JSX.Element => {
@@ -33,9 +33,9 @@ const Login = ({ onSetUser }: Props): JSX.Element => {
       if (!email || !password) {
         throw new Error("name, email and password are required");
       }
-      const body = {email, password}
+      const body = { email, password };
       const response = await axios.post(url, body);
-      const {user, token}: UserIndentity = response.data;
+      const { user, token }: UserIndentity = response.data;
       if (user) {
         setMessage("User created");
         localStorage.setItem("user", JSON.stringify(user));
@@ -45,9 +45,15 @@ const Login = ({ onSetUser }: Props): JSX.Element => {
         localStorage.setItem("token", token);
         navigate("/");
       }
-    }  catch (err) {
-      const message = err instanceof Error ? err.message : "Something went wrong, please try again later.";
+    } catch (err) {
+      const message =
+        err instanceof Error
+          ? err.message
+          : "Something went wrong, please try again later.";
       setMessage(message);
+      if (err instanceof AxiosError) {
+        setMessage(err.response?.data.message || "Error, please sign up");
+      }
     }
   };
 
@@ -57,6 +63,19 @@ const Login = ({ onSetUser }: Props): JSX.Element => {
     }
   }, [navigate]);
 
+  useEffect(() => {
+    let timerId: number | undefined;
+    if (message) {
+      timerId = setTimeout(() => {
+        setMessage("");
+      }, 2000);
+    }
+
+    return () => {
+      if (timerId) clearInterval(timerId);
+    };
+  }, [message]);
+
   return (
     <div className="relative flex flex-col min-h-screen justify-center items-center bg-gray-200">
       <h1 className="text-3xl text-orange-400">Login</h1>
@@ -65,7 +84,9 @@ const Login = ({ onSetUser }: Props): JSX.Element => {
         className="flex flex-col gap-2 justify-around items-center min-h-max h-[30vh] min-w-max w-[30%] shadow-[0px_2px_5px_1px_rgb(0,0,0)] p-4 rounded"
       >
         <div className="flex justify-between items-center gap-2 text-xl w-full">
-          <label htmlFor="email" className="text-orange-400">Email</label>
+          <label htmlFor="email" className="text-orange-400">
+            Email
+          </label>
           <input
             type="email"
             id="email"
@@ -79,7 +100,9 @@ const Login = ({ onSetUser }: Props): JSX.Element => {
         </div>
 
         <div className="flex justify-between items-center gap-2 text-xl w-full">
-          <label htmlFor="password" className="text-orange-400">Password</label>
+          <label htmlFor="password" className="text-orange-400">
+            Password
+          </label>
           <input
             type="password"
             id="password"

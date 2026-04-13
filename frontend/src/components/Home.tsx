@@ -4,12 +4,12 @@ import Loader from "../components/Loading";
 import { Link, useNavigate } from "react-router";
 
 interface Props {
-  user: User,
+  user: User;
 }
 
 interface User {
-    name: string
-    isAdmin: boolean
+  name: string;
+  isAdmin: boolean;
 }
 
 const Home = ({ user }: Props): React.JSX.Element => {
@@ -42,41 +42,41 @@ const Home = ({ user }: Props): React.JSX.Element => {
 
   const handleLogout = () => {
     setLogout(true);
-  }
+  };
 
   useEffect(() => {
-      if (logout) {
-        localStorage.removeItem("token");
-        tokenRef.current = "";
-      } else {
-        tokenRef.current = localStorage.getItem("token")!
-      }
-      if (!tokenRef.current) {
-        navigate("/login");
-      }
-    }, [navigate, logout]);
+    if (logout) {
+      localStorage.removeItem("token");
+      tokenRef.current = "";
+    } else {
+      tokenRef.current = localStorage.getItem("token")!;
+    }
+    if (!tokenRef.current) {
+      navigate("/login");
+    }
+  }, [navigate, logout]);
 
   return (
-    <div className="relative w-full min-h-screen flex flex-col gap-2 justify-center items-center border-2 border-orange-100 bg-gray-200">
+    <div className="relative w-full min-h-screen flex flex-col gap-2 justify-center items-center text-white border-orange-100 bg-[rgb(20_20_20)]">
       <h1 className="text-[16px] md:text-2xl absolute top-1 left-0.5 p-2 min-w-max max-w-[50vh]">
-        Welcome, {" "}
+        Welcome,{" "}
         <span className="italic text-orange-400 text-[18px] md:text-3xl">
-          { 
-          user.name.split(" ").map((word) => {
-            let returnVal = "";
-            for (let i = 0; i < word.length; i++) {
-              if (i === 0) {
-                returnVal = returnVal + word[i].toUpperCase();
+          {user.name
+            .split(" ")
+            .map((word) => {
+              let returnVal = "";
+              for (let i = 0; i < word.length; i++) {
+                if (i === 0) {
+                  returnVal = returnVal + word[i].toUpperCase();
+                } else {
+                  returnVal += word[i];
+                }
               }
-              else {
-                returnVal += word[i];
-              }
-            }
-            return returnVal;
-          }).join(" ")
-          }
+              return returnVal;
+            })
+            .join(" ")}
         </span>
-        </h1>
+      </h1>
       <h2>Ticket web Aplication</h2>
       <button
         onClick={() => fetchTickets()}
@@ -86,17 +86,17 @@ const Home = ({ user }: Props): React.JSX.Element => {
       </button>
       {loading ? <Loader /> : !error ? data : <p>{error}</p>}
       <div className=" absolute top-1 right-1 flex min-w-max gap-2 justify-center items-center min-h-max">
-      <Link
-        to="/signup"
-        className="bg-blue-600 rounded p-1 right-0.5 cursor-pointer shadow-[0px_2px_5px_1px_rgb(0,0,0)] active:shadow-[0px_1px_3px_1px_rgb(0,0,0)]"
-      >
-        Sign Up
-      </Link>
-      <button
+        <Link
+          to="/signup"
+          className="bg-blue-600 rounded p-1 right-0.5 cursor-pointer shadow-[0px_2px_5px_1px_rgb(0,0,0)] active:shadow-[0px_1px_3px_1px_rgb(0,0,0)]"
+        >
+          Sign Up
+        </Link>
+        <button
           className="bg-blue-600 rounded p-1 flex-1 cursor-pointer shadow-[0px_2px_5px_1px_rgb(0,0,0)] active:shadow-[0px_1px_3px_1px_rgb(0,0,0)]"
           onClick={handleLogout}
         >
-            Log out
+          Log out
         </button>
       </div>
     </div>
