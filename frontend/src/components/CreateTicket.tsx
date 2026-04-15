@@ -55,23 +55,23 @@ const CreateTicket = (): React.JSX.Element => {
   ) => {
     e.preventDefault();
     try {
-       const response = await axios.post(
+      const response = await axios.post(
         "http://localhost:3000/api/tickets/",
         formData,
       );
       setMessage(response.data.message);
       console.log(response.data.message);
       setFormData({
-      name: "",
-      email: "",
-      priority: "medium",
-      description: "",
-      createdBy: "",
-    });
+        name: "",
+        email: "",
+        priority: "medium",
+        description: "",
+        createdBy: "",
+      });
     } catch (err) {
       if (err instanceof Error) {
         console.log(err.message);
-        setMessage(err.message)
+        setMessage(err.message);
       }
       if (err instanceof AxiosError) {
         console.log(err.response?.data);
@@ -83,13 +83,13 @@ const CreateTicket = (): React.JSX.Element => {
   useEffect(() => {
     let timerId: number | undefined;
     if (message) {
-         timerId = setTimeout(() => {
-            setMessage("");
-        }, 2000)
+      timerId = setTimeout(() => {
+        setMessage("");
+      }, 2000);
     }
     return () => {
-        clearTimeout(timerId);
-    }
+      clearTimeout(timerId);
+    };
   }, [message]);
 
   useEffect(() => {
@@ -224,13 +224,17 @@ const CreateTicket = (): React.JSX.Element => {
         </div>
         <button
           type="submit"
-          disabled={message ? true: false}
-          className={`text-orange-400 rounded text-center p-2 shadow-[0px_2px_5px_1px_rgb(0,0,0)] active:shadow-[0px_1px_3px_1px_rgb(0,0,0)] ${message ? "bg-blue-100 opacity-40 cursor-not-allowed" :"bg-blue-500 opacity-100 cursor-pointer"}`}
+          disabled={message ? true : false}
+          className={`text-orange-400 rounded text-center p-2 shadow-[0px_2px_5px_1px_rgb(0,0,0)] active:shadow-[0px_1px_3px_1px_rgb(0,0,0)] ${message ? "bg-blue-100 opacity-40 cursor-not-allowed" : "bg-blue-500 opacity-100 cursor-pointer"}`}
         >
           Create Ticket
         </button>
       </form>
-        <p className={`text-[14px] font-bold text-orange-400 italic transition-all duration-1500 delay-1000 ease-in-out  ${message ? "-translate-x-[100vw] opacity-0 ": "translate-x-0 opacity-100"}`}>{message}</p>
+      <p
+        className={`text-[14px] font-bold text-orange-400 italic transition-all duration-1500 delay-1000 ease-in-out  ${message ? "-translate-x-[100vw] opacity-0 " : "translate-x-0 opacity-100"}`}
+      >
+        {message}
+      </p>
     </div>
   );
 };

@@ -11,7 +11,7 @@ export async function login(req: Request, res: Response) {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw new Error("Unauthorize, please sign up");
+    return res.status(400).json({error: "Unauthorize, please sign up"});
   }
 
   const isPasswordCorrect = await user.comparePassword(password);

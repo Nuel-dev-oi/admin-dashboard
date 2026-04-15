@@ -19,8 +19,8 @@ export function serverError(
           `This ${key} with value: ${value} is already in our database`,
       )
       .join("");
-      return res.status(400).json({ message });
-    }
-    
-  return res.status(500).json({ message: err.message });
+    return res.status(400).json({ error: message });
+  }
+  console.log(err);
+  return res.status(500).json({ error: "Server timeout" });
 }

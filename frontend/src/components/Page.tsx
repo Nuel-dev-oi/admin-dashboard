@@ -11,8 +11,8 @@ interface User {
 }
 
 const Pages = (): React.JSX.Element => {
-  const cuurrent_user = JSON.parse(localStorage.getItem("user")!);
-  const name = cuurrent_user?.name || "";
+  const current_user = JSON.parse(localStorage.getItem("user")!);
+  const name = current_user?.name || "";
   const [user, setUser] = useState<User>({ name, isAdmin: false });
 
   const onSetUser = (value: User) => {

@@ -52,7 +52,7 @@ const Login = ({ onSetUser }: Props): JSX.Element => {
           : "Something went wrong, please try again later.";
       setMessage(message);
       if (err instanceof AxiosError) {
-        setMessage(err.response?.data.message || "Error, please sign up");
+        setMessage(err.response?.data.error || "Error, please sign up");
       }
     }
   };
