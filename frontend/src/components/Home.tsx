@@ -90,7 +90,7 @@ const Home = ({ user }: Props): React.JSX.Element => {
             .join(" ")}
         </span>
       </h1>
-      <h2>Ticket web Aplication</h2>
+      <h2 className="mt-15">Ticket web Aplication</h2>
       <button
         onClick={() => fetchTickets()}
         className="rounded bg-blue-500 text-center p-2 cursor-pointer shadow-[0px_2px_5px_1px_rgb(0,0,0)] active:shadow-[0px_1px_3px_1px_rgb(0,0,0)]"
@@ -98,7 +98,7 @@ const Home = ({ user }: Props): React.JSX.Element => {
         Get Tickets
       </button>
       {loading ? <Loader /> : !error ? mapedData : <p>{error}</p>}
-      <div className=" absolute top-1 right-1 flex min-w-max gap-2 justify-center items-center min-h-max">
+      <div className=" absolute top-1 right-1 flex flex-col md:flex-row min-w-max gap-2 justify-center items-center min-h-max">
         <Link
           to="/ticket/createticket"
           className="bg-blue-600 rounded p-1 right-0.5 cursor-pointer shadow-[0px_2px_5px_1px_rgb(0,0,0)] active:shadow-[0px_1px_3px_1px_rgb(0,0,0)]"
