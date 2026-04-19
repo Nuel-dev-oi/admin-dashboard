@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios, { AxiosError } from "axios";
 import Loader from "../components/Loading";
 import { Link, useNavigate } from "react-router";
+import TicketTable from "./TicketTable";
 
 interface Props {
   user: User;
@@ -20,14 +21,7 @@ const Home = ({ user }: Props): React.JSX.Element => {
   const tokenRef = useRef<string>(localStorage.getItem("token") || "");
   const [logout, setLogout] = useState(false);
 
-  const mapedData = data.map(
-    (
-      datum: { name: string; _id: string; [key: string]: string | Date },
-      index,
-    ) => {
-      return <p key={index}>{datum.name}</p>;
-    },
-  );
+  const mapedData = data.length > 0 && <TicketTable tickets={data} />;
 
   const fetchTickets = async () => {
     try {

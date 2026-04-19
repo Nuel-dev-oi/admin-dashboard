@@ -15,7 +15,7 @@ export async function connectDB(uri: string) {
       })
       .catch((error) => {
         console.log(error);
-        process.exit(1);
+        process.exit();
       });
   }
 }

@@ -12,7 +12,7 @@ export async function getTickets(req: Request, res: Response) {
 
     if (!admin)
       return res.status(400).json({ error: "Only admins can fetch tickets" });
-    const tickets = await Ticket.find();
+    const tickets = await Ticket.find().select("-_id -email -createdBy -__v");
 
     console.log(tickets);
     res.status(200).json({ confiramtion: "OK", message: tickets });

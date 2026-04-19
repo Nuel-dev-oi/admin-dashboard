@@ -22,5 +22,5 @@ export function serverError(
     return res.status(400).json({ error: message });
   }
   console.log(err);
-  return res.status(500).json({ error: "Server timeout" });
+  return res.status(500).json({ error: err.message || "Server timeout" });
 }
