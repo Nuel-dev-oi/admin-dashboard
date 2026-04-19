@@ -100,10 +100,10 @@ const Home = ({ user }: Props): React.JSX.Element => {
       {loading ? <Loader /> : !error ? mapedData : <p>{error}</p>}
       <div className=" absolute top-1 right-1 flex min-w-max gap-2 justify-center items-center min-h-max">
         <Link
-          to="/signup"
+          to="/ticket/createticket"
           className="bg-blue-600 rounded p-1 right-0.5 cursor-pointer shadow-[0px_2px_5px_1px_rgb(0,0,0)] active:shadow-[0px_1px_3px_1px_rgb(0,0,0)]"
         >
-          Sign Up
+          Create Ticket
         </Link>
         <button
           className="bg-blue-600 rounded p-1 flex-1 cursor-pointer shadow-[0px_2px_5px_1px_rgb(0,0,0)] active:shadow-[0px_1px_3px_1px_rgb(0,0,0)]"
